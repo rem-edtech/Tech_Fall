@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Week 1 Activity Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F2F5F7;
+  --surface:#FFFFFF;
+  --ink:#1F2A44;
+  --muted:#556078;
+  --line:#D6DDE5;
+  --teal:#176574;
+  --teal-soft:#DCEDEF;
+  --gold:#F2A541;
+  --gold-soft:#FCEBD1;
+  --slate:#6B778C;
+  --slate-soft:#E4E8EE;
+  --hero:#1F2A44;
+  --hero-ink:#F4F6F8;
+  --hero-muted:#BFCADB;
+  --on-gold:#1F2A44;
+  --shadow:0 1px 2px rgba(31,42,68,.06),0 6px 20px rgba(31,42,68,.06);
+  --display:'M PLUS Rounded 1c','Noto Sans JP','Hiragino Maru Gothic ProN',sans-serif;
+  --body:'Noto Sans JP','Hiragino Sans','Yu Gothic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121826;--surface:#1B2334;--ink:#EEF1F6;--muted:#A9B4C6;--line:#2D384D;
+    --teal:#5FC1CF;--teal-soft:#16333B;--gold:#F2A541;--gold-soft:#3A2E1C;
+    --slate:#9AA6BA;--slate-soft:#262F42;--hero:#0B1020;--hero-ink:#F4F6F8;--hero-muted:#AEB9CC;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121826;--surface:#1B2334;--ink:#EEF1F6;--muted:#A9B4C6;--line:#2D384D;
+  --teal:#5FC1CF;--teal-soft:#16333B;--gold:#F2A541;--gold-soft:#3A2E1C;
+  --slate:#9AA6BA;--slate-soft:#262F42;--hero:#0B1020;--hero-ink:#F4F6F8;--hero-muted:#AEB9CC;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:960px;margin-inline:auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.3;margin:0}
+p{margin:0}
+.en{color:var(--muted);font-size:.92em;line-height:1.5}
+body.no-en .en{display:none}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:0 0 28px 28px;margin-inline:-16px;padding:40px 24px 36px;position:relative;overflow:hidden}
+.hero-in{max-width:960px;margin-inline:auto;display:flex;flex-direction:column;gap:14px;position:relative}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:36px solid var(--gold);opacity:.18}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-size:clamp(28px,5.5vw,46px);font-weight:800}
+.hero .en{color:var(--hero-muted);font-size:17px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tag{font-size:13px;padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:var(--hero-ink)}
+.bigidea{margin-top:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:16px 20px}
+.bigidea strong{font-family:var(--display);font-size:clamp(19px,3.4vw,24px);font-weight:800}
+.bigidea strong span{color:var(--gold)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;margin-inline:-16px;padding-inline:16px;border-bottom:1px solid var(--line)}
+.nav-in{max-width:960px;margin-inline:auto;display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:14px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.nav a:hover,.nav a:focus-visible{border-color:var(--teal);color:var(--teal);outline:none}
+.toggle{margin-left:auto;white-space:nowrap;font:inherit;font-size:13px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--teal);background:var(--teal-soft);color:var(--teal);cursor:pointer}
+.toggle:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* sections */
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:72px}
+.sec-head{display:flex;flex-direction:column;gap:4px}
+.sec-label{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--teal)}
+.sec-head h2{font-size:clamp(24px,4vw,32px);font-weight:800}
+.time{display:inline-block;font-size:13px;font-weight:700;background:var(--gold);color:var(--on-gold);border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:middle;font-variant-numeric:tabular-nums}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 58px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--teal);color:var(--surface);font-family:var(--display);font-weight:800;display:grid;place-items:center;font-size:15px}
+.steps b{display:block}
+
+/* categories */
+.cats{display:flex;flex-wrap:wrap;gap:10px}
+.cat{display:flex;flex-direction:column;padding:10px 18px;border-radius:12px;font-weight:700;line-height:1.35}
+.cat small{font-weight:500;font-size:13px;opacity:.85}
+.cat.s{background:var(--teal-soft);color:var(--teal);border:2px solid var(--teal)}
+.cat.m{background:var(--gold-soft);color:var(--ink);border:2px solid var(--gold)}
+.cat.d{background:var(--slate-soft);color:var(--ink);border:2px dashed var(--slate)}
+
+.note{font-size:14px;background:var(--gold-soft);border-radius:12px;padding:12px 16px}
+
+/* scenarios */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow);transition:border-color .2s}
+.card[data-pick="s"]{border-color:var(--teal)}
+.card[data-pick="m"]{border-color:var(--gold)}
+.card[data-pick="d"]{border-color:var(--slate)}
+.num{font-family:var(--display);font-weight:800;font-size:28px;color:var(--teal);line-height:1}
+.card .jp{font-weight:500;font-size:16.5px}
+.card .en{font-size:14px}
+.picks{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.pick{font:inherit;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.pick:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pick[aria-pressed="true"].ps{background:var(--teal);border-color:var(--teal);color:var(--surface)}
+.pick[aria-pressed="true"].pm{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.pick[aria-pressed="true"].pd{background:var(--slate);border-color:var(--slate);color:var(--surface)}
+
+/* prompts */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.prompt{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.who{display:flex;align-items:center;gap:10px}
+.who .badge{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:18px}
+.badge.a{background:var(--slate-soft);color:var(--ink)}
+.badge.b{background:var(--teal);color:var(--surface)}
+.who h3{font-size:18px}
+.quote{font-size:18px;font-weight:500;background:var(--bg);border-radius:10px;padding:12px 14px}
+.copies{display:flex;gap:8px;flex-wrap:wrap}
+.copy{font:inherit;font-size:13px;font-weight:700;padding:6px 12px;border-radius:8px;border:1px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer}
+.copy:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.copy.done{background:var(--teal);color:var(--surface)}
+.reading{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.read-label{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--teal)}
+.read-title{font-size:26px;font-weight:800}
+.read-sub{font-family:var(--body);font-size:16px;font-weight:500;color:var(--muted);margin-left:8px}
+.read-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.read-col{background:var(--bg);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.read-col p:not(.read-lang){font-size:16px;line-height:1.85}
+.read-lang{font-size:12.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.credit{font-size:12.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:12px}
+.credit a{color:var(--teal)}
+
+/* questions */
+.qs{display:flex;flex-direction:column;gap:10px}
+.q{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.q .mark{flex:none;font-family:var(--display);font-weight:800;font-size:22px;color:var(--gold);line-height:1.4}
+.q b{font-size:17px}
+
+/* rules + homework */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.rule{background:var(--hero);color:var(--hero-ink);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.rule .n{font-family:var(--display);font-weight:800;font-size:26px;color:var(--gold);line-height:1}
+.rule h3{font-size:18px}
+.rule .en{color:var(--hero-muted)}
+.hw{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+.hw ol{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:10px}
+.due{font-weight:700;color:var(--teal)}
+
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:4px}
+footer .mail{user-select:all;font-weight:700;color:var(--ink)}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">第1回 · Week 1 · Technology Ethics &amp; Digital Communication 2</p>
+    <h1>学習ツールとしてのAI<br>アクティビティ・ガイド</h1>
+    <p class="en">AI as a Learning Tool: Activity Guide</p>
+    <div class="hero-meta">
+      <span class="tag">金曜2限 · Fri Period 2</span>
+      <span class="tag">BNC101</span>
+      <span class="tag">R.E. Miller</span>
+    </div>
+    <div class="bigidea">
+      <strong>AIは「答えマシン」ではなく、<span>学びのパートナー</span>。</strong>
+      <p class="en">AI is a learning partner, not an answer machine.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Sections">
+  <div class="nav-in">
+    <a href="#warmup">ウォームアップ</a>
+    <a href="#activity1">活動1</a>
+    <a href="#activity2">活動2</a>
+    <a href="#debrief">ふり返り</a>
+    <a href="#rules">AIルール</a>
+    <a href="#homework">宿題</a>
+    <button class="toggle" id="enToggle" type="button" aria-pressed="true">English: ON</button>
+  </div>
+</nav>
+
+<main class="wrap" style="margin-top:32px">
+
+  <section id="warmup">
+    <div class="sec-head">
+      <p class="sec-label">ウォームアップ · WARM-UP</p>
+      <h2>同じ質問、2つの聞き方</h2>
+      <p class="en">Same question, two prompts. Which one helps you learn?</p>
+    </div>
+    <div class="pair">
+      <div class="prompt">
+        <div class="who"><span class="badge a">A</span><h3>答えをもらう聞き方</h3></div>
+        <p class="quote">「光合成とは何？答えを教えて。」</p>
+        <p class="en">"What is photosynthesis? Give me the answer."</p>
+      </div>
+      <div class="prompt">
+        <div class="who"><span class="badge b">B</span><h3>学ぶための聞き方</h3></div>
+        <p class="quote">「これは私の授業ノートです。光合成をやさしく説明して、理解を確認する質問を2つ出して。」</p>
+        <p class="en">"Here are my class notes. Explain photosynthesis simply. Then ask me 2 questions to check my understanding."</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="activity1">
+    <div class="sec-head">
+      <p class="sec-label">活動1 · ACTIVITY 1 <span class="time">20分</span></p>
+      <h2>学習パートナー？答えマシン？</h2>
+      <p class="en">Learning Partner or Answer Machine?</p>
+    </div>
+
+    <ol class="steps">
+      <li><b>8つの場面を読む</b><span class="en">Read the 8 scenarios.</span></li>
+      <li><b>グループで話し合う（10分）</b>どれに当てはまる？なぜ？<span class="en">Discuss in your group: which one, and why?</span></li>
+      <li><b>Canvasで各自回答（10分）</b>授業終了で締め切ります。<span class="en">Answer on Canvas on your own. It closes when class ends.</span></li>
+    </ol>
+
+    <div class="cats" aria-label="Categories">
+      <div class="cat s">サポート<small>Support · 学びを助ける使い方</small></div>
+      <div class="cat m">不適切<small>Misuse · 学びの代わりになる使い方</small></div>
+      <div class="cat d">場合による<small>Depends · 使い方やルール次第</small></div>
+    </div>
+
+    <p class="note">下のボタンは<b>自分用のメモ</b>です（ほかの人には見えません）。答えは必ずCanvasで提出してください。<span class="en"> The buttons below are notes for you only. Submit your answers on Canvas.</span></p>
+
+    <div class="grid" id="scenarios"></div>
+  </section>
+
+  <section id="activity2">
+    <div class="sec-head">
+      <p class="sec-label">活動2 · ACTIVITY 2 <span class="time">20分</span></p>
+      <h2>AIで試してみよう：2つの聞き方</h2>
+      <p class="en">Try it with AI: two ways to ask</p>
+    </div>
+
+    <div class="reading" id="reading">
+      <p class="read-label">使う文章 · TEXT TO USE</p>
+      <h3 class="read-title">減圧症 <span class="read-sub">Decompression sickness</span></h3>
+      <div class="read-cols">
+        <div class="read-col" lang="ja">
+          <p class="read-lang">日本語（原文）</p>
+          <p class="rt" id="txt-ja">減圧症（げんあつしょう、英: decompression sickness）は、減圧障害の一種で、減圧によって体内にある窒素ガスなどの生理的に不活性なガスが過飽和の状態となり、その気泡が組織内や血管内に形成され引き起こされる障害。略称はDCS。</p>
+          <p class="rt" id="txt-ja2">減圧障害（Decompression illness、略称DCI）とは減圧症（Decompression sickness、略称DCS）や動脈ガス塞栓症（Arterial gas embolism、略称AGE）及びこれらの鑑別が困難な病態の総称をいう。</p>
+          <p class="rt">通常の環境で気圧に変動がない場合、体内の生理的不活性ガスの組織内圧は変化せず体内組織と環境の窒素分圧は等しいままである。ところが、加圧（潜水では潜降）があると吸入空気中の窒素分圧が上昇し、肺の毛細血管から窒素が取り込まれて組織内窒素分圧が上昇するようになる。その後、減圧（潜水では浮上）すると、高気圧下となり体内組織に取り込まれた窒素ガスの体積が膨張して過飽和状態となる。</p>
+          <button class="copy" type="button" data-copy-from="ja">文章をコピー</button>
+        </div>
+        <div class="read-col" lang="en">
+          <p class="read-lang">English (translation)</p>
+          <p class="rt" id="txt-en">Decompression sickness is a type of decompression illness. It is a disorder that happens when decompression makes nitrogen and other physiologically inert gases in the body supersaturated, so that bubbles form in the tissues and blood vessels. It is abbreviated as DCS.</p>
+          <p class="rt" id="txt-en2">Decompression illness (DCI) is a general term for decompression sickness (DCS), arterial gas embolism (AGE), and conditions in which it is hard to tell these apart.</p>
+          <p class="rt">In a normal environment where the air pressure does not change, the pressure of physiologically inert gases in the body's tissues stays the same, and the partial pressure of nitrogen in the tissues remains equal to that of the surroundings. However, when pressure increases (in diving, when descending), the partial pressure of nitrogen in the inhaled air rises, nitrogen is taken in through the capillaries of the lungs, and the partial pressure of nitrogen in the tissues rises. After that, when pressure decreases (in diving, when ascending), the body comes under high pressure, and the nitrogen gas taken into the tissues expands in volume and becomes supersaturated.</p>
+          <button class="copy" type="button" data-copy-from="en">Copy text</button>
+        </div>
+      </div>
+      <p class="credit">出典 · Source: 「<a href="https://ja.wikipedia.org/wiki/%E6%B8%9B%E5%9C%A7%E7%97%87" target="_blank" rel="noopener">減圧症</a>」ウィキペディア日本語版（導入部分と本文の第1段落）、<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.ja" target="_blank" rel="noopener">CC BY-SA 4.0</a>、2026年9月28日閲覧。英語訳は授業用に作成したもので、同じくCC BY-SA 4.0で提供します。<br>Introduction and first body paragraph of the Japanese Wikipedia article "減圧症" (Decompression sickness), CC BY-SA 4.0, accessed 28 September 2026. English translation made for this class, also shared under CC BY-SA 4.0.</p>
+    </div>
+
+    <div class="pair">
+      <div class="prompt">
+        <div class="who"><span class="badge a">A</span><h3>Aさんの聞き方 <span class="en">· Partner A</span></h3></div>
+        <p class="quote">「この文章を要約して。」</p>
+        <p class="en">"Summarize this text."</p>
+        <div class="copies">
+          <button class="copy" type="button" data-copy="この文章を要約して。">コピー（日本語）</button>
+          <button class="copy" type="button" data-copy="Summarize this text.">Copy (English)</button>
+        </div>
+      </div>
+      <div class="prompt">
+        <div class="who"><span class="badge b">B</span><h3>Bさんの聞き方 <span class="en">· Partner B</span></h3></div>
+        <p class="quote">「この文章をやさしく説明して、例を1つ出して。そのあと、理解を確認する質問を2つして。」</p>
+        <p class="en">"Explain this text simply with one example. Then ask me 2 questions to check my understanding."</p>
+        <div class="copies">
+          <button class="copy" type="button" data-copy="この文章をやさしく説明して、例を1つ出して。そのあと、理解を確認する質問を2つして。">コピー（日本語）</button>
+          <button class="copy" type="button" data-copy="Explain this text simply with one example. Then ask me 2 questions to check my understanding.">Copy (English)</button>
+        </div>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li><b>文章をAIに貼りつけ、プロンプトを送る</b><span class="en">Paste the text into the AI and send your prompt.</span></li>
+      <li><b>グループで比べる</b>どちらが学びに役立った？AIに間違いはあった？元の文章に間違いはあった？<span class="en">Compare: which helped more? Did the AI make a mistake? Did you find any mistakes in the original text?</span></li>
+      <li><b>Canvasで各自3問に回答</b><span class="en">Answer 3 questions on Canvas on your own.</span></li>
+    </ol>
+    <p class="note">ペアがいない人は、AとBの両方を試してください。<span class="en"> No partner? Try both prompts yourself.</span></p>
+  </section>
+
+  <section id="debrief">
+    <div class="sec-head">
+      <p class="sec-label">ふり返り · DEBRIEF</p>
+      <h2>「場合による」ときは、自分に聞こう</h2>
+      <p class="en">When it "depends", ask yourself:</p>
+    </div>
+    <div class="qs">
+      <div class="q"><span class="mark">?</span><div><b>元の資料をAIに渡した？</b><p class="en">Did I give AI the original material?</p></div></div>
+      <div class="q"><span class="mark">?</span><div><b>学んでいる？それとも答えをもらっているだけ？</b><p class="en">Am I learning, or just getting an answer?</p></div></div>
+      <div class="q"><span class="mark">?</span><div><b>AIなしで説明できる？</b><p class="en">Could I explain this without AI?</p></div></div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="sec-head">
+      <p class="sec-label">AI利用ポリシー · COURSE AI POLICY</p>
+      <h2>AIを使うときの3つのルール</h2>
+      <p class="en">Three rules for using AI</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><span class="n">1</span><h3>元の資料を示す</h3><p>AIに使ったノート・スライド・資料を必ず示す。</p><p class="en">Give the original material you used.</p></div>
+      <div class="rule"><span class="n">2</span><h3>AIの答えを確認する</h3><p>正しい？役に立つ？自分でチェックする。</p><p class="en">Check what AI says. Is it correct? Is it useful?</p></div>
+      <div class="rule"><span class="n">3</span><h3>責任は自分にある</h3><p>最終的な理解と結論は、自分のもの。</p><p class="en">You are responsible for your final understanding.</p></div>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="sec-head">
+      <p class="sec-label">宿題 · HOMEWORK</p>
+      <h2>アカウント確認と宿題</h2>
+      <p class="en">Account check and homework</p>
+    </div>
+    <div class="hw">
+     
+      <ol>
+        <li>ChatGPT・Gemini・Gemini Notebook（旧NotebookLM）にログインし、Canvasの「セットアップ確認」に回答する。<p class="en">Log in to ChatGPT, Gemini and Gemini Notebook (formerly NotebookLM), then complete the Setup Check on Canvas.</p></li>
+        <li>他の授業の資料（スライドやノート）を1つCanvasにアップロードする。第3回と第8回で使います。<p class="en">Upload one file of materials from another class. We will use it in Weeks 3 and 8.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <p>Technology Ethics &amp; Digital Communication 2 · 2026年度 秋学期 · 追手門学院大学</p>
+    <p>質問 · Questions: <span class="mail">miller@haruka.otemon.ac.jp</span></p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var SC=[
+    ["講義スライドの内容を、やさしい言葉で説明し直してもらう。","Ask AI to re-explain a lecture slide in simpler words."],
+    ["宿題の問題をAIに貼りつけ、その答えをそのまま提出する。","Paste a homework question into AI and submit its answer as it is."],
+    ["自分のノートから練習問題を作ってもらう。","Ask AI to make practice questions from your own notes."],
+    ["この授業のふり返りをAIに書いてもらう。","Ask AI to write your reflection for this class."],
+    ["自分が書いたレポートの文法をチェックしてもらう。","Ask AI to check the grammar in an essay you wrote."],
+    ["まだ読んでいない文章を要約してもらう。","Ask AI to summarize a reading you have not read."],
+    ["「私の答えは合ってる？」と聞き、教科書でも確認する。","Ask AI \"Is my answer correct?\", then check the textbook too."],
+    ["読む代わりに、記事全体をAIで翻訳する。","Use AI to translate a whole article instead of reading it."]
+  ];
+  var OPTS=[["s","サポート","ps"],["m","不適切","pm"],["d","場合による","pd"]];
+  var KEY="w1-picks", picks={};
+  try{picks=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){picks={};}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(picks));}catch(e){}}
+  var grid=document.getElementById("scenarios");
+  SC.forEach(function(s,i){
+    var n=i+1, card=document.createElement("article");
+    card.className="card"; if(picks[n]) card.setAttribute("data-pick",picks[n]);
+    card.innerHTML='<span class="num">'+n+'</span><p class="jp"></p><p class="en"></p><div class="picks" role="group" aria-label="Scenario '+n+'"></div>';
+    card.querySelector(".jp").textContent=s[0];
+    card.querySelector(".en").textContent=s[1];
+    var box=card.querySelector(".picks");
+    OPTS.forEach(function(o){
+      var b=document.createElement("button");
+      b.type="button"; b.className="pick "+o[2]; b.textContent=o[1];
+      b.setAttribute("aria-pressed",picks[n]===o[0]?"true":"false");
+      b.addEventListener("click",function(){
+        picks[n]=picks[n]===o[0]?null:o[0];
+        if(!picks[n]) delete picks[n];
+        box.querySelectorAll(".pick").forEach(function(x){x.setAttribute("aria-pressed","false");});
+        if(picks[n]){b.setAttribute("aria-pressed","true");card.setAttribute("data-pick",picks[n]);}
+        else card.removeAttribute("data-pick");
+        save();
+      });
+      box.appendChild(b);
+    });
+    grid.appendChild(card);
+  });
+
+  document.querySelectorAll(".copy").forEach(function(btn){
+    var label=btn.textContent;
+    btn.addEventListener("click",function(){
+      var from=btn.getAttribute("data-copy-from");
+      var text=from?Array.prototype.map.call(btn.closest(".read-col").querySelectorAll(".rt"),function(x){return x.textContent;}).join("\n\n"):btn.getAttribute("data-copy");
+      function ok(){btn.classList.add("done");btn.textContent=/[ぁ-んァ-ン一-龥]/.test(label)?"コピーしました":"Copied";setTimeout(function(){btn.classList.remove("done");btn.textContent=label;},1600);}
+      function fallback(){
+        var q=from?btn.closest(".read-col"):btn.closest(".prompt").querySelector(".quote");
+        var r=document.createRange(); r.selectNodeContents(q);
+        var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        btn.textContent=/[ぁ-んァ-ン一-龥]/.test(label)?"選択しました":"Selected";
+        setTimeout(function(){btn.textContent=label;},1600);
+      }
+      try{
+        if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fallback);}
+        else fallback();
+      }catch(e){fallback();}
+    });
+  });
+
+  var t=document.getElementById("enToggle"), EK="w1-en";
+  function setEn(on){document.body.classList.toggle("no-en",!on);t.setAttribute("aria-pressed",on?"true":"false");t.textContent=on?"English: ON":"English: OFF";}
+  var en=true; try{en=localStorage.getItem(EK)!=="off";}catch(e){}
+  setEn(en);
+  t.addEventListener("click",function(){en=!en;setEn(en);try{localStorage.setItem(EK,en?"on":"off");}catch(e){}});
+})();
+</script>
+
+</body>
+</html>
