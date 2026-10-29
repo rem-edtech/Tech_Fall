@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ja" data-lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第5回 クラスタスク · Week 5 Class Task</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#1B2540; --ink-soft:#4A5672; --paper:#FFFFFF; --page:#F3F5F8;
+  --honey:#F2A541; --honey-deep:#C97A0E; --wax:#FFF5DD; --comb-line:#EBC77A;
+  --teal:#176574; --teal-soft:#E1EFF1; --alert:#B3261E; --alert-soft:#FBEBEA; --line:#DCE2EA;
+  --display:'M PLUS Rounded 1c','Noto Sans JP',sans-serif; --body:'Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;
+}
+*{box-sizing:border-box}
+html[data-lang="ja"] [lang="en"]:not(html), html[data-lang="en"] [lang="ja"]:not(html){display:none!important}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.75}
+h1,h2,h3{font-family:var(--display);line-height:1.3;margin:0}
+p{margin:0}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--honey);outline-offset:3px;border-radius:6px}
+
+/* hero: a honeycomb with one bee dancing its figure-eight */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v32M28 64L0 80v32' fill='none' stroke='%23F2A541' stroke-width='2'/%3E%3C/svg%3E");background-size:56px 97px}
+.hero-in{position:relative;max-width:980px;margin:0 auto;padding:28px 20px 40px;display:grid;grid-template-columns:1fr 260px;gap:24px;align-items:center}
+.top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.course{font-size:14px;color:#C9D2E3}
+.langs{display:inline-flex;background:rgba(255,255,255,.1);border-radius:999px;padding:4px}
+.langs button{font:700 14px var(--body);border:0;border-radius:999px;padding:6px 16px;background:transparent;color:#fff;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--honey);color:var(--ink)}
+.hero h1{font-size:clamp(30px,5.2vw,48px);font-weight:800;letter-spacing:.01em}
+.hero h1 small{display:block;font-size:.42em;font-weight:700;color:var(--honey);margin-bottom:6px;letter-spacing:.04em}
+.hero .lead{margin-top:12px;color:#D8DFEC;max-width:34em}
+.dance{width:100%;max-width:260px;justify-self:end}
+.dance .path{fill:none;stroke:var(--honey);stroke-width:3;stroke-dasharray:4 9;opacity:.65}
+.dance .waggle{fill:none;stroke:#fff;stroke-width:4;stroke-linejoin:round}
+
+/* progress bar of the four parts */
+.parts{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(27,37,64,.06)}
+.parts ol{list-style:none;margin:0 auto;padding:10px 16px;max-width:980px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.parts a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;white-space:nowrap;padding:6px 12px 6px 6px;border-radius:999px}
+.parts a:hover{background:var(--wax)}
+.hex{width:30px;height:34px;display:grid;place-items:center;background:var(--honey);color:var(--ink);font-family:var(--display);font-weight:800;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.parts .min{color:var(--ink-soft);font-weight:500}
+
+main{max-width:980px;margin:0 auto;padding:32px 20px 64px;display:flex;flex-direction:column;gap:28px}
+.notice{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px}
+.must{background:var(--alert-soft);border-color:#F1C9C6;color:var(--alert);font-weight:700}
+.download{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 16px var(--body);border:0;border-radius:12px;padding:12px 20px;cursor:pointer;text-decoration:none}
+.btn-teal{background:var(--teal);color:#fff}
+.btn-teal:hover{background:#0F4F5B}
+.btn-honey{background:var(--honey);color:var(--ink)}
+.btn-honey:hover{background:#E5952B}
+.btn-ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+
+section.part{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 28px 30px;scroll-margin-top:70px;display:flex;flex-direction:column;gap:18px}
+.part-head{display:flex;align-items:center;gap:14px}
+.part-head .hex{width:52px;height:60px;font-size:24px}
+.part-head h2{font-size:clamp(22px,3.4vw,30px);font-weight:800}
+.part-head .min{font-size:15px;color:var(--ink-soft);font-weight:500;margin-left:4px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;display:flex;flex-direction:column;gap:12px}
+.steps li{counter-increment:s;position:relative;padding-left:46px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:800;display:grid;place-items:center;font-size:15px}
+.steps b{display:block}
+.steps .sub{display:block;color:var(--ink-soft);font-size:16px}
+.tip{background:var(--wax);border-left:6px solid var(--honey);border-radius:12px;padding:14px 18px}
+
+.text[hidden]{display:none}
+.text{background:var(--wax);border:1px solid var(--comb-line);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.text h3{font-size:20px}
+figure{margin:0;background:#fff;border-radius:14px;padding:12px;border:1px solid var(--comb-line)}
+figure img{width:100%;height:auto;display:block}
+figcaption{margin-top:10px;font-size:15px;color:var(--ink-soft);display:flex;flex-direction:column;gap:4px}
+.credit{font-size:13px;color:var(--ink-soft)}
+
+.finish{background:var(--teal);color:#fff;border-radius:22px;padding:26px 28px;display:flex;flex-direction:column;gap:14px}
+.finish h2{font-size:24px}
+.finish pre{white-space:pre-wrap;font:15px/1.7 var(--body);background:rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;margin:0}
+
+/* the prompt popup */
+dialog{border:0;border-radius:22px;padding:0;width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 40px);box-shadow:0 24px 70px rgba(10,15,30,.4);color:var(--ink)}
+dialog::backdrop{background:rgba(18,26,46,.6)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){dialog[open]{animation:none}}
+.dlg-head{background:var(--honey);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dlg-head h2{font-size:20px}
+.dlg-body{padding:20px 24px;display:flex;flex-direction:column;gap:14px;overflow:auto;max-height:calc(100vh - 220px)}
+.dlg-body pre{white-space:pre-wrap;font:15px/1.75 var(--body);background:var(--page);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0}
+.dlg-foot{padding:14px 24px 20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;border-top:1px solid var(--line)}
+.copied{color:var(--teal);font-weight:700;align-self:center;margin-right:auto}
+.after{display:none;font-weight:700;color:var(--teal)}
+.after.show{display:block}
+@media (max-width:720px){.hero-in{grid-template-columns:1fr}.dance{display:none}section.part{padding:22px 18px}}
+</style>
+</head>
+<body>
+<header class="hero">
+ <div class="hero-in">
+  <div class="top"><span class="course">Technology Ethics &amp; Digital Communication 2 · R.E. Miller</span>
+   <div class="langs" role="group" aria-label="Language"><button type="button" data-set="ja" aria-pressed="true">日本語</button><button type="button" data-set="en" aria-pressed="false">English</button></div></div>
+  <div>
+   <h1><span lang="ja"><small>第5回 クラスタスク · 10点</small>練習の前と後</span><span lang="en"><small>Week 5 Class Task · 10 points</small>Before and after practice</span></h1>
+   <p class="lead"><span lang="ja">ミツバチのダンスの文章を読んで、ChatGPTと練習する前と後で、同じ7問に答えます。自分の理解がどう変わるか、たしかめましょう。</span><span lang="en">Read about the honey bee dance and answer the same 7 questions before and after practising with ChatGPT. See how your understanding changes.</span></p>
+  </div>
+  <svg class="dance" viewBox="0 0 260 210" aria-hidden="true">
+   <path class="path" d="M130,170 L130,40 C230,-5 230,215 130,170 L130,40 C30,-5 30,215 130,170"/>
+   <path class="waggle" d="M130,170 l8,-10 -16,-10 16,-10 -16,-10 16,-10 -16,-10 16,-10 -16,-10 16,-10 -16,-10 16,-10 -8,-10"/>
+   <g class="bee"><animateMotion id="beeMove" dur="8s" repeatCount="indefinite" rotate="auto" path="M130,170 L130,40 C230,-5 230,215 130,170 L130,40 C30,-5 30,215 130,170"/><g transform="rotate(90)"><ellipse rx="12" ry="8" fill="#F2A541"/><rect x="-3" y="-8" width="4" height="16" fill="#1B2540"/><rect x="5" y="-7" width="3" height="14" fill="#1B2540"/><ellipse cx="-2" cy="-10" rx="7" ry="4" fill="#fff" opacity=".85"/></g></g>
+  </svg>
+ </div>
+</header>
+<nav class="parts" aria-label="Parts">
+ <ol>
+  <li><a href="#a"><span class="hex">A</span><span lang="ja">練習の前に</span><span lang="en">Before</span> <span class="min">7<span lang="ja">分</span><span lang="en"> min</span></span></a></li>
+  <li><a href="#b"><span class="hex">B</span><span lang="ja">ChatGPTと練習</span><span lang="en">Practise</span> <span class="min">15<span lang="ja">分</span><span lang="en"> min</span></span></a></li>
+  <li><a href="#c"><span class="hex">C</span><span lang="ja">練習の後で</span><span lang="en">After</span> <span class="min">6<span lang="ja">分</span><span lang="en"> min</span></span></a></li>
+  <li><a href="#submit"><span class="hex">✓</span><span lang="ja">提出</span><span lang="en">Submit</span> <span class="min">3<span lang="ja">分</span><span lang="en"> min</span></span></a></li>
+ </ol>
+</nav>
+<main>
+ <div class="notice">
+  <div class="panel download">
+   <a class="btn btn-teal" href="W5ClassTask.docx" download><span lang="ja">解答用紙をダウンロード（W5ClassTask.docx）</span><span lang="en">Download the answer sheet (W5ClassTask.docx)</span></a>
+   <p><span lang="ja">Wordで開いて、学籍番号と氏名を書きます。</span><span lang="en">Open it in Word and write your student number and name.</span></p>
+  </div>
+  <div class="panel must"><span lang="ja">必ず、この解答用紙（W5ClassTask.docx）に書いて提出してください。ほかのファイル（自分で作ったWordファイル、PDF、写真、スクリーンショットなど）は0点になります。</span><span lang="en">You must write your answers on this answer sheet (W5ClassTask.docx) and submit it. Any other file (your own Word file, a PDF, a photo, a screenshot, etc.) gets 0 points.</span></div>
+ </div>
+
+ <section class="part" id="a">
+  <div class="part-head"><span class="hex">A</span><h2><span lang="ja">練習の前に</span><span lang="en">Before practice</span><span class="min">7<span lang="ja">分</span><span lang="en"> min</span></span></h2></div>
+  <ol class="steps"><li><b><span lang="ja">下の文章と図を読む（3分）</span><span lang="en">Read the text and the figure below (3 min)</span></b><span class="sub"><span lang="ja">図の説明もよく読みましょう。ダンスの向きと速さが、何を伝えているかに注目。</span><span lang="en">Read the figure captions too. Notice what the direction and the speed of the dance tell other bees.</span></span></li><li><b><span lang="ja">文章を見ないで、解答用紙のA1に答える（4分）</span><span lang="en">Without looking at the text, answer A1 on the answer sheet (4 min)</span></b><span class="sub"><span lang="ja">AIを使わず、文章を見ないで答えます。わからなくても、いちばん近いと思うものを選びます。この答えは点数になりません。</span><span lang="en">Answer without AI and without looking at the text. If you are not sure, choose your best guess. These answers are not scored.</span></span></li></ol>
+  <div><button class="btn btn-ghost" type="button" id="hideText" aria-controls="theText" aria-expanded="true"><span data-state="shown"><span lang="ja">読み終わったら、文章をかくす</span><span lang="en">Finished reading? Hide the text</span></span><span data-state="hidden" hidden><span lang="ja">文章をもう一度見せる</span><span lang="en">Show the text again</span></span></button></div>
+  <div class="text" id="theText">
+   <h3><span lang="ja">文章：ミツバチのダンス</span><span lang="en">Text: The honey bee dance</span></h3>
+   <figure><img src="beedance.png" alt="ミツバチのダンスの図：巣板の上で真上から右に45°のダンスは、太陽から右に45°の方向にある食料を伝える · A dance 45° right of straight up on the comb shows food 45° right of the sun" width="2400" height="1220">
+    <figcaption><span lang="ja">太陽に対する角度が方向を示し、尻を揺する時間が距離を示す。</span><span lang="en">The angle relative to the sun shows the direction, and the length of time the bee shakes its rear shows the distance.</span><span lang="ja">ミツバチのダンスが形作る八の字。</span><span lang="en">The figure-eight shape made by the bee dance.</span><span lang="ja">巣を垂直線上に向かって右45°の方向へ動くダンス（A）は、巣箱を出て太陽の右45°の方角にある食料の情報を知らせる（B）。</span><span lang="en">A dance that moves 45° to the right of vertical on the comb (A) tells the other bees about food located 45° to the right of the sun as seen from outside the hive (B).</span></figcaption></figure>
+   <p lang="ja">ミツバチのダンス（英: Waggle dance）は、ミツバチが8の字に歩き回る行動に対して養蜂と動物行動学で使用される専門用語。このようなダンスをすることで、彼らのミツバチの巣の仲間に蜜や花粉、水源や新しい巣の予定地があることを知らせることができる。このようにミツバチのダンスは多様な資源を収集するのに適した場所で他のハチを集めることができる調達を成功させる手段である。</p><p lang="en">The bee dance (English: waggle dance) is a technical term used in beekeeping and animal behaviour for the behaviour in which honey bees walk around in a figure-eight. By dancing this way, a bee can tell its hive-mates where nectar, pollen, a water source or a possible site for a new nest is located. In this way, the bee dance is a means of successful foraging: it can gather other bees at places suited to collecting various resources.</p><p lang="ja">ダンスの速度は巣から指し示すものの距離が遠くなるにしたがって遅くなる。指し示すものが80ｍ以内の場合、ダンスを速めるために8の字が崩れて円形にダンスをする。そのため、かつては8の字ダンス（遠距離）だけでなく、円形ダンスまたは丸型ダンス（近距離）もあると考えられたが、円形ダンスは8の字ダンスの短縮形であるといえる。</p><p lang="en">The speed of the dance becomes slower as the distance from the hive to the place being indicated becomes greater. When the place is within 80 m, the figure-eight breaks down and the bee dances in a circle, which makes the dance faster. For this reason, it was once thought that besides the figure-eight dance (for long distances) there was also a separate circle or round dance (for short distances). However, the round dance can be described as a shortened form of the figure-eight dance.</p><p lang="ja">ミツバチのダンスの意味を初めて解読したのは、動物行動学者であるカール・フォン・フリッシュである。</p><p lang="en">The first person to work out the meaning of the bee dance was the animal behaviour researcher Karl von Frisch.</p>
+   <p class="credit"><span lang="ja">出典：ウィキペディア日本語版「ミツバチのダンス」（版 111289883、2026年10月28日に閲覧）。CC BY-SA 4.0。図は授業用にかき直したもの。英語訳は授業用。</span><span lang="en">Source: Japanese Wikipedia, "ミツバチのダンス" (revision 111289883, read 28 October 2026), CC BY-SA 4.0. The figure was redrawn for this class; the English translation was made for this class.</span> <a href="https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%84%E3%83%90%E3%83%81%E3%81%AE%E3%83%80%E3%83%B3%E3%82%B9">Wikipedia</a></p>
+  </div>
+ </section>
+
+ <section class="part" id="b">
+  <div class="part-head"><span class="hex">B</span><h2><span lang="ja">ChatGPTと練習</span><span lang="en">Practise with ChatGPT</span><span class="min">15<span lang="ja">分</span><span lang="en"> min</span></span></h2></div>
+  <ol class="steps"><li><b><span lang="ja">新しいチャットを開く</span><span lang="en">Open a new chat</span></b><span class="sub"><span lang="ja">ChatGPTで新しいチャットを始めます（画面の上が「Chat」）。</span><span lang="en">Start a new chat in ChatGPT (check that Chat is selected at the top).</span></span></li><li><b><span lang="ja">下のボタンを押して、出てきた文を全部コピーしてChatGPTに貼る</span><span lang="en">Press the button below, copy all of the text and paste it into ChatGPT</span></b><span class="sub"><span lang="ja">練習の指示と、文章と図の説明が入っています。コピーしたら、閉じます。</span><span lang="en">It has the practice instructions, the text and the figure captions. Close it after copying.</span></span></li><li><b><span lang="ja">1問ずつ、自分で答える</span><span lang="en">Answer each question yourself, one at a time</span></b><span class="sub"><span lang="ja">7問（選択肢4問、空らん・短い答え3問）。まちがえたら、ヒントをもとにもう一度考えます。答えだけを聞かないこと。</span><span lang="en">7 questions (4 multiple choice, 3 fill-in-the-blank or short answer). If you are wrong, use the hint and think again. Do not ask for the answer.</span></span></li><li><b><span lang="ja">解答用紙のB1〜B4に書く</span><span lang="en">Fill in B1–B4 on the answer sheet</span></b><span class="sub"><span lang="ja">B1 最初の問題と自分の答え、B2 答えの手がかり、B3 7問のうち正解した数、B4 空らん・短く答える問題3問と自分の答え（コピーして貼る）。</span><span lang="en">B1 the first question and your answer, B2 where the text supports the answer, B3 how many of the 7 you got right, B4 the 3 fill-in-the-blank / short-answer questions and your answers (copy and paste).</span></span></li></ol>
+  <div class="tip"><b><span lang="ja">ChatGPTもまちがえることがあります。</span><span lang="en">ChatGPT can be wrong too.</span></b> <span lang="ja">先生がためしたとき、ChatGPTは正しい答えを「まちがい」と判定しました。先生が「なぜこの答えはまちがいなのですか」と聞くと、ChatGPTは自分のまちがいに気づきました。自分が正しいと思ったら、聞きましょう。ChatGPTがまちがっていると思ったら、聞きましょう。</span><span lang="en">When Ross tried this, ChatGPT marked a correct answer as wrong. Ross asked why the answer was marked incorrect, and ChatGPT realized its mistake. If you think you are right, ask. If you think ChatGPT is wrong, ask.</span></div>
+  <div><button class="btn btn-honey" type="button" id="openPrompt"><span lang="ja">ChatGPTに貼る文を開く</span><span lang="en">Open the text to paste into ChatGPT</span></button></div>
+  <p class="after" id="after"><span lang="ja">閉じました。ChatGPTで練習して、解答用紙のB1〜B4に書いたら、パートCへ進みましょう。</span><span lang="en">Closed. Practise in ChatGPT, fill in B1–B4, then go on to Part C.</span></p>
+ </section>
+
+ <section class="part" id="c">
+  <div class="part-head"><span class="hex">C</span><h2><span lang="ja">練習の後で</span><span lang="en">After practice</span><span class="min">6<span lang="ja">分</span><span lang="en"> min</span></span></h2></div>
+  <ol class="steps"><li><b><span lang="ja">ChatGPTを閉じて、文章を見ない</span><span lang="en">Close ChatGPT and do not look at the text</span></b><span class="sub"><span lang="ja">AIを使わず、文章を見ないで答えます。</span><span lang="en">Answer without AI and without looking at the text.</span></span></li><li><b><span lang="ja">解答用紙のC1に、もう一度答える</span><span lang="en">Answer C1 on the answer sheet again</span></b><span class="sub"><span lang="ja">A1と同じ7問です。</span><span lang="en">These are the same 7 questions as A1.</span></span></li><li><b><span lang="ja">C2とC3に書く</span><span lang="en">Fill in C2 and C3</span></b><span class="sub"><span lang="ja">C2 A1から答えを変えた問題、C3 いちばん役に立ったもの。</span><span lang="en">C2 the questions you changed from A1, C3 what helped you most.</span></span></li></ol>
+ </section>
+
+ <section class="part" id="submit">
+  <div class="part-head"><span class="hex">✓</span><h2><span lang="ja">提出</span><span lang="en">Submit</span><span class="min">3<span lang="ja">分</span><span lang="en"> min</span></span></h2></div>
+  <ol class="steps"><li><b><span lang="ja">全部の質問に答えたか確認する</span><span lang="en">Check that you answered every item</span></b><span class="sub"><span lang="ja"></span><span lang="en"></span></span></li><li><b><span lang="ja">ファイル名を変える</span><span lang="en">Rename the file</span></b><span class="sub"><span lang="ja">第5回のTech授業の提出物で、あなたのファイルだとわかる名前にします。</span><span lang="en">Use a name that shows it is your Week 5 Tech class submission.</span></span></li><li><b><span lang="ja">Canvasの課題「第5回 クラスタスク」で提出する</span><span lang="en">Submit it to the Canvas assignment "Week 5 Class Task"</span></b><span class="sub"><span lang="ja"></span><span lang="en"></span></span></li></ol>
+ </section>
+
+ <section class="finish" aria-labelledby="fin">
+  <h2 id="fin"><span lang="ja">早く終わったら</span><span lang="en">If you finish early</span></h2>
+  <p><span lang="ja">早く終わったら：この練習のやり方を、ほかの授業で勉強していることにも使ってみましょう。自分のノートや教科書のページを貼って、同じ指示で練習問題を出してもらいます。</span><span lang="en">If you finish early: try this way of practising with something else you are studying. Paste your own notes or a textbook page and ask for practice questions with the same instructions.</span></p>
+  <pre id="finishPrompt"><span lang="ja">下の資料だけを使って、私の理解を確かめる練習問題を7問作ってください。4問は選択肢のある問題、3問は空らんをうめる問題か短く答える問題にしてください。空らんの問題と短く答える問題は、資料の言葉をさがすだけで答えられる問題ではなく、考えを新しい場面に使う問題にしてください。1問ずつ出して、私が答えるまで答えを見せないでください。私が答えたら、合っているかどうかを教えてください。まちがっていたら、答えは言わずに、ヒントをください。
+
+【資料】
+（ここに自分のノートや教科書の文を貼る）</span><span lang="en">Use only the material below. Make 7 practice questions that check my understanding: 4 multiple-choice questions and 3 fill-in-the-blank or short-answer questions. The fill-in-the-blank and short-answer questions should not be answerable just by finding words in the material; they should use the ideas in a new situation. Ask one question at a time, and do not show the answer until I answer. When I answer, tell me if I am right. If I am wrong, do not tell me the answer; give me a hint.
+
+[Material]
+(paste your own notes or textbook text here)</span></pre>
+  <div><button class="btn btn-honey" type="button" data-copy="finishPrompt"><span lang="ja">この指示をコピー</span><span lang="en">Copy these instructions</span></button> <span class="copied" hidden data-done="finishPrompt"><span lang="ja">コピーしました</span><span lang="en">Copied</span></span></div>
+ </section>
+</main>
+
+<dialog id="promptDlg" aria-labelledby="dlgTitle">
+ <div class="dlg-head"><h2 id="dlgTitle"><span lang="ja">ChatGPTに貼る文</span><span lang="en">Paste this into ChatGPT</span></h2></div>
+ <div class="dlg-body">
+  <p><span lang="ja">全部コピーして、新しいチャットに貼ってください。</span><span lang="en">Copy all of it and paste it into a new chat.</span></p>
+  <pre id="promptText"><span lang="ja">下の文章と図の説明だけを使って、私の理解を確かめる練習問題を7問作ってください。4問は選択肢のある問題、3問は空らんをうめる問題か短く答える問題にしてください。空らんの問題と短く答える問題は、文章の言葉をさがすだけで答えられる問題ではなく、考えを新しい場面に使う問題にしてください。1問ずつ出して、私が答えるまで答えを見せないでください。私が答えたら、合っているかどうかを教えてください。まちがっていたら、答えは言わずに、ヒントをください。
+
+【文章】
+ミツバチのダンス（英: Waggle dance）は、ミツバチが8の字に歩き回る行動に対して養蜂と動物行動学で使用される専門用語。このようなダンスをすることで、彼らのミツバチの巣の仲間に蜜や花粉、水源や新しい巣の予定地があることを知らせることができる。このようにミツバチのダンスは多様な資源を収集するのに適した場所で他のハチを集めることができる調達を成功させる手段である。
+ダンスの速度は巣から指し示すものの距離が遠くなるにしたがって遅くなる。指し示すものが80ｍ以内の場合、ダンスを速めるために8の字が崩れて円形にダンスをする。そのため、かつては8の字ダンス（遠距離）だけでなく、円形ダンスまたは丸型ダンス（近距離）もあると考えられたが、円形ダンスは8の字ダンスの短縮形であるといえる。
+ミツバチのダンスの意味を初めて解読したのは、動物行動学者であるカール・フォン・フリッシュである。
+
+【図の説明】
+太陽に対する角度が方向を示し、尻を揺する時間が距離を示す。
+ミツバチのダンスが形作る八の字。
+巣を垂直線上に向かって右45°の方向へ動くダンス（A）は、巣箱を出て太陽の右45°の方角にある食料の情報を知らせる（B）。</span><span lang="en">Use only the text and the figure captions below. Make 7 practice questions that check my understanding: 4 multiple-choice questions and 3 fill-in-the-blank or short-answer questions. The fill-in-the-blank and short-answer questions should not be answerable just by finding words in the text; they should use the ideas in a new situation. Ask one question at a time, and do not show the answer until I answer. When I answer, tell me if I am right. If I am wrong, do not tell me the answer; give me a hint.
+
+[Text]
+The bee dance (English: waggle dance) is a technical term used in beekeeping and animal behaviour for the behaviour in which honey bees walk around in a figure-eight. By dancing this way, a bee can tell its hive-mates where nectar, pollen, a water source or a possible site for a new nest is located. In this way, the bee dance is a means of successful foraging: it can gather other bees at places suited to collecting various resources.
+The speed of the dance becomes slower as the distance from the hive to the place being indicated becomes greater. When the place is within 80 m, the figure-eight breaks down and the bee dances in a circle, which makes the dance faster. For this reason, it was once thought that besides the figure-eight dance (for long distances) there was also a separate circle or round dance (for short distances). However, the round dance can be described as a shortened form of the figure-eight dance.
+The first person to work out the meaning of the bee dance was the animal behaviour researcher Karl von Frisch.
+
+[Figure captions]
+The angle relative to the sun shows the direction, and the length of time the bee shakes its rear shows the distance.
+The figure-eight shape made by the bee dance.
+A dance that moves 45° to the right of vertical on the comb (A) tells the other bees about food located 45° to the right of the sun as seen from outside the hive (B).</span></pre>
+ </div>
+ <div class="dlg-foot">
+  <span class="copied" hidden data-done="promptText"><span lang="ja">コピーしました。ChatGPTに貼りましょう。</span><span lang="en">Copied. Paste it into ChatGPT.</span></span>
+  <button class="btn btn-teal" type="button" data-copy="promptText"><span lang="ja">全部コピー</span><span lang="en">Copy all</span></button>
+  <button class="btn btn-ghost" type="button" id="closePrompt"><span lang="ja">閉じる</span><span lang="en">Close</span></button>
+ </div>
+</dialog>
+
+<script>
+(function(){
+  var root=document.documentElement, KEY='w5-lang';
+  function setLang(l){root.setAttribute('data-lang',l);root.setAttribute('lang',l==='ja'?'ja':'en');
+    document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l?'true':'false');});
+    try{localStorage.setItem(KEY,l);}catch(e){}}
+  var saved=null; try{saved=localStorage.getItem(KEY);}catch(e){}
+  if(saved==='en'||saved==='ja') setLang(saved);
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.set);});});
+
+  function visibleText(id){
+    var el=document.getElementById(id), l=root.getAttribute('data-lang');
+    var part=el.querySelector('[lang="'+(l==='en'?'en':'ja')+'"]'); return (part||el).textContent;}
+  function copy(id){
+    var t=visibleText(id), done=document.querySelector('[data-done="'+id+'"]');
+    function ok(){if(done){done.hidden=false;setTimeout(function(){done.hidden=true;},4000);}}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallback(t);ok();});} else {fallback(t);ok();}}
+  function fallback(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(a);}
+  document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copy(b.dataset.copy);});});
+
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){var m=document.getElementById('beeMove');if(m)m.remove();}
+  var ht=document.getElementById('hideText'), tx=document.getElementById('theText');
+  ht.addEventListener('click',function(){var show=tx.hidden;tx.hidden=!show;ht.setAttribute('aria-expanded',show?'true':'false');
+    ht.querySelector('[data-state=shown]').hidden=!show;ht.querySelector('[data-state=hidden]').hidden=show;});
+  var dlg=document.getElementById('promptDlg');
+  document.getElementById('openPrompt').addEventListener('click',function(){if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');});
+  document.getElementById('closePrompt').addEventListener('click',function(){if(dlg.close)dlg.close();else dlg.removeAttribute('open');});
+  dlg.addEventListener('close',function(){var a=document.getElementById('after');a.classList.add('show');a.scrollIntoView({block:'center'});});
+  dlg.addEventListener('click',function(e){if(e.target===dlg&&dlg.close)dlg.close();});
+})();
+</script>
+</body>
+</html>
